@@ -28,8 +28,7 @@ app.get("/", (req, res) => {
   //       );
   //     });
 
-  res.writable(
-    JSON.stringify(lead) +
+  res.send(
       `<br><br><br><button onclick=${sendReq}>send</button>`
   );
 });
