@@ -6,12 +6,12 @@ const app = express();
 const port = 3000;
 
 app.get("/", async (req, res) => {
-//   const lead = req.query;
+  const lead = req.query;
 
 //   // Log to file (optional)
 //   fs.appendFileSync("leads.log", JSON.stringify(lead) + "\n");
 
-  res.send("RECEIVED");
+  res.send(JSON.stringify(lead));
 });
 
 app.listen(port, () => {
