@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 
   res.writable(
     JSON.stringify(lead) +
-      `<br><br><br><button onclick=${sendReq()}>send</button>`
+      `<br><br><br><button onclick=${sendReq}>send</button>`
   );
 });
 
