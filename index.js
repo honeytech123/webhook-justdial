@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
 //   // Log to file (optional)
 //   fs.appendFileSync("leads.log", JSON.stringify(lead) + "\n");
 
-  res.send("RECEIVED");
+  res.send(JSON.stringify(lead));
 });
 
 app.listen(port, () => {
