@@ -28,9 +28,7 @@ app.get("/", (req, res) => {
 //       );
 //     });
 
-res.write(JSON.stringify(lead));
-res.write(`<br><br><br><button onclick=${sendReq()}>send</button>`);
-res.end();
+res.send(JSON.stringify(lead) + `<br><br><br><button onclick=${sendReq()}>send</button>`);
 });
 
 app.listen(port, () => {
