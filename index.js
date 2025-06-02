@@ -5,15 +5,15 @@ const fs = require("fs");
 const app = express();
 const port = 3000;
 
-app.get("/lead", async (req, res) => {
-  const lead = req.query;
+app.get("/", async (req, res) => {
+//   const lead = req.query;
 
-  // Log to file (optional)
-  fs.appendFileSync("leads.log", JSON.stringify(lead) + "\n");
+//   // Log to file (optional)
+//   fs.appendFileSync("leads.log", JSON.stringify(lead) + "\n");
 
   res.send("RECEIVED");
 });
 
-app.listen(port, "0.0.0.0", () => {
+app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
