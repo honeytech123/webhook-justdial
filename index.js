@@ -7,7 +7,7 @@ const port = 3000;
 app.get("/", (req, res) => {
   const lead = req.query;
   function sendReq() {
-    alert("hello world");
+    window.alert("hello world");
   }
 
   //   axios
