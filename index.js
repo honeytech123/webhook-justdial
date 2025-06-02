@@ -10,25 +10,28 @@ app.get("/", (req, res) => {
     alert("hello world");
   }
 
-//   axios
-//     .post("https://www.zohoapis.com/crm/v8/Leads", data, {
-//       headers: {
-//         Authorization:
-//           "Zoho-oauthtoken 1000.8cb99dxxxxxxxxxxxxx9be93.9b8xxxxxxxxxxxxxxxf",
-//         "Content-Type": "application/json",
-//       },
-//     })
-//     .then((response) => {
-//       console.log("Response:", response.data);
-//     })
-//     .catch((error) => {
-//       console.error(
-//         "Error:",
-//         error.response ? error.response.data : error.message
-//       );
-//     });
+  //   axios
+  //     .post("https://www.zohoapis.com/crm/v8/Leads", data, {
+  //       headers: {
+  //         Authorization:
+  //           "Zoho-oauthtoken 1000.8cb99dxxxxxxxxxxxxx9be93.9b8xxxxxxxxxxxxxxxf",
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //     .then((response) => {
+  //       console.log("Response:", response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(
+  //         "Error:",
+  //         error.response ? error.response.data : error.message
+  //       );
+  //     });
 
-res.send(JSON.stringify(lead) + `<br><br><br><button onclick=${sendReq()}>send</button>`);
+  res.writable(
+    JSON.stringify(lead) +
+      `<br><br><br><button onclick=${sendReq()}>send</button>`
+  );
 });
 
 app.listen(port, () => {
