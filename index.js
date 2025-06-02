@@ -4,72 +4,66 @@ const axios = require("axios");
 const app = express();
 const port = 3000;
 
-app.get("/", (req, res) => {
+app.get("/lead", (req, res) => {
   const lead = req.query;
 
-  res.send(`
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>Send Lead</title>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-      </head>
-      <body>
-        <h2>Lead Data:</h2>
-        <pre id="leadData">${JSON.stringify(lead, null, 2)}</pre>
-        <button onclick="sendReq()">Send to Zoho</button>
+  const data = [
+    {
+      Justdial_Id: lead.leadid || "",
+      Lead_Type: lead.leadtype || "",
+      First_Name: `${lead.prefix || "null"}. ${lead.name || "null"}`,
+      Last_Name: "Doe",
+      Mobile: lead.mobile || "",
+      Phone: lead.phone || "",
+      Email: lead.email || "",
+      indiamartleadsofficialpluginforrealtimeleads__Lead_Push_Time:
+        `${lead.date || "0000/00/00"} ${lead.time || "00:00:00"}`,
+      Date: lead.date || "",
+      Category: lead.category || "",
+      City: lead.city || "",
+      Street: lead.Area || "",
+      Branch_Area: lead.brancharea || "",
+      DND:
+        lead.dncmobile === 0
+          ? "Call now"
+          : lead.dncmobile == ""
+          ? ""
+          : "Do not Disturb",
+      Company_Name: lead.company || "",
+      Zip_Code: lead.pincode || "",
+      Branch_Id: lead.branchpin || "",
+      Parent_Id: lead.parentid || "",
+      Lead_Source: "JD",
+    },
+  ];
 
-        <script>
-          function sendReq() {
-            alert("hello");
-            // const data = {
-            //   data: [${JSON.stringify(lead)}]
-            // };
+  const finalData = JSON.stringify({ data: data });
 
-            // axios
-            //   .post("https://www.zohoapis.com/crm/v8/Leads", data, {
-            //     headers: {
-            //       Authorization: "Zoho-oauthtoken 1000.8cb99dxxxxxxxxxxxxx9be93.9b8xxxxxxxxxxxxxxxf",
-            //       "Content-Type": "application/json",
-            //     },
-            //   })
-            //   .then((response) => {
-            //     alert("Lead sent successfully!");
-            //     console.log("Response:", response.data);
-            //   })
-            //   .catch((error) => {
-            //     alert("Error sending lead.");
-            //     console.error("Error:", error.response ? error.response.data : error.message);
-            //   });
-          }
-        </script>
-      </body>
-    </html>
-  `);
+  if (Object.entries(lead).length > 0) {
+    axios
+      .post("https://www.zohoapis.in/crm/v8/Leads", finalData, {
+        headers: {
+          Authorization:
+            "Bearer 1000.3bcff2ee0e25a5603c574dbebac34fdf.722963df93d11d2b28bc41a02d740056",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log("Response:", response.data);
+        res.send("Success");
+      })
+      .catch((error) => {
+        console.error(error.response ? error.response.data.Error.data[0].details : error.message);
+        
+        console.error(
+          "Error:",
+          error.response ? error.response.data : error.message
+        );
+        res.send("Failed");
+      });
+  }
 });
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
-
-// axios
-//   .post("https://www.zohoapis.com/crm/v8/Leads", data, {
-//     headers: {
-//       Authorization:
-//         "Zoho-oauthtoken 1000.8cb99dxxxxxxxxxxxxx9be93.9b8xxxxxxxxxxxxxxxf",
-//       "Content-Type": "application/json",
-//     },
-//   })
-//   .then((response) => {
-//     console.log("Response:", response.data);
-//   })
-//   .catch((error) => {
-//     console.error(
-//       "Error:",
-//       error.response ? error.response.data : error.message
-//     );
-//   });
-
-//   res.send(
-//       `${JSON.stringify(lead)}<br><br><br><button onclick=${sendReq}>send</button>`
-//   );
