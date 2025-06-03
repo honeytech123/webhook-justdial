@@ -45,7 +45,7 @@ app.get("/leads", (req, res) => {
       .post("https://www.zohoapis.in/crm/v8/Leads", finalData, {
         headers: {
           Authorization:
-            "Bearer 1000.3bcff2ee0e25a5603c574dbebac34fdf.722963df93d11d2b28bc41a02d740056",
+            "Zoho-oauthtoken 1000.4f809effad61b9b38218f424cd3d7c26.6c21dcc217732c8beba3fbee2d506f2e",
           "Content-Type": "application/json",
         },
       })
