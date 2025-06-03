@@ -4,10 +4,16 @@ const axios = require("axios");
 const app = express();
 const port = 3000;
 
-app.get("/", (req, res) => {
+app.get("/leads", (req, res) => {
   const lead = req.query;
 
   res.send("Leads");
+});
+
+app.get("/", (req, res) => {
+  const lead = req.query;
+
+  res.send("Home");
   // const data = [
   //   {
   //     Justdial_Id: lead.leadid || "",
