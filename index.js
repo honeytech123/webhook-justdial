@@ -4,7 +4,7 @@ const axios = require("axios");
 const app = express();
 const port = 3000;
 
-app.get("/lead", (req, res) => {
+app.get("/", (req, res) => {
   const lead = req.query;
 
   res.send("Leads");
