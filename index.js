@@ -1,7 +1,8 @@
 // server.js
-const express = require("express");
-const cors = require("cors");
-const apiRoutes = require("./routes/api.routes.cjs");
+import express from "express";
+import cors from "cors";
+import apiRoutes from "./routes/api.routes.js"; 
+
 const port = process.env.PORT || 3000;
 
 //initialize express to the variable app

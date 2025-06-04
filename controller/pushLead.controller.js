@@ -1,7 +1,7 @@
-require("dotenv").config();
-const ZOHOCRMSDK = require("@zohocrm/nodejs-sdk-8.0");
+import 'dotenv/config';
+import * as ZOHOCRMSDK from '@zohocrm/nodejs-sdk-8.0';
 
-exports.pushLead = async (req, res) => {
+export const pushLead = async (req, res) => {
   // Extract leads from the URL parameter which is sent by Justdial
   const leads = req.query;
 
