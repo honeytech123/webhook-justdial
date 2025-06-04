@@ -126,7 +126,7 @@ export const pushLead = async (req, res) => {
       }
     }
 
-    res.status(200).json({ message: "RECEIVED" }).send("RECEIVED");
+    res.status(200).json({ message: "RECEIVED" });
   };
 
   let moduleAPIName = "leads";
