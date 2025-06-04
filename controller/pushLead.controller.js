@@ -125,9 +125,10 @@ export const pushLead = async (req, res) => {
         }
       }
     }
+
+    res.status(200).json({ message: "RECEIVED" }).send("RECEIVED");
   };
 
   let moduleAPIName = "leads";
-
-  res.send("Leads");
+  await createLeads(moduleAPIName);
 };
