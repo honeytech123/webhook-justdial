@@ -1,5 +1,6 @@
 import "dotenv/config";
-import { ZOHOCRMSDK, initializeZoho } from "../init/initializer.js";
+import { initializeZoho } from "../init/initializer.js";
+import { Record, HeaderMap, Choice } from "@zohocrm/nodejs-sdk-8.0";
 
 await initializeZoho();
 
@@ -32,10 +33,10 @@ export const pushLead = async (req, res) => {
 
   // Function to create and push leads to zoho crm
   const createLeads = async (moduleAPIName) => {
-    let recordOperations = new ZOHOCRMSDK.Record.RecordOperations(moduleAPIName);
-    let request = new ZOHOCRMSDK.Record.BodyWrapper();
+    let recordOperations = new Record.RecordOperations(moduleAPIName);
+    let request = new Record.BodyWrapper();
     let data = [];
-    let lead1 = new ZOHOCRMSDK.Record.Record();
+    let lead1 = new Record.Record();
 
     // For System defined fields
     lead1.addKeyValue("First_Name", finalData.firstName);
@@ -46,7 +47,7 @@ export const pushLead = async (req, res) => {
     lead1.addKeyValue("City", finalData.city);
     lead1.addKeyValue("Street", finalData.street);
     lead1.addKeyValue("Zip_Code", finalData.zipCode);
-    lead1.addKeyValue("Lead_Source", new ZOHOCRMSDK.Choice("JD"));
+    lead1.addKeyValue("Lead_Source", new Choice("JD"));
 
     // For Custom fields
     lead1.addKeyValue("Justdial_Id", finalData.justDialId);
@@ -63,7 +64,7 @@ export const pushLead = async (req, res) => {
     // Add Record instance to List
     data.push(lead1);
     request.setData(data);
-    let headerInstance = new ZOHOCRMSDK.HeaderMap();
+    let headerInstance = new HeaderMap();
 
     // Create a record
     let response = await recordOperations.createRecords(request, headerInstance);
@@ -73,11 +74,11 @@ export const pushLead = async (req, res) => {
       let responseObject = response.getObject();
 
       if (responseObject != null) {
-        if (responseObject instanceof ZOHOCRMSDK.Record.ActionWrapper) {
+        if (responseObject instanceof Record.ActionWrapper) {
           let actionResponses = responseObject.getData();
 
           actionResponses.forEach((actionResponse) => {
-            if (actionResponse instanceof ZOHOCRMSDK.Record.SuccessResponse) {
+            if (actionResponse instanceof Record.SuccessResponse) {
               console.log("Status: " + actionResponse.getStatus().getValue());
               console.log("Code: " + actionResponse.getCode().getValue());
               console.log("Details");
@@ -91,7 +92,7 @@ export const pushLead = async (req, res) => {
               }
 
               console.log("Message: " + actionResponse.getMessage().getValue());
-            } else if (actionResponse instanceof ZOHOCRMSDK.Record.APIException) {
+            } else if (actionResponse instanceof Record.APIException) {
               console.log("Status: " + actionResponse.getStatus().getValue());
               console.log("Code: " + actionResponse.getCode().getValue());
               console.log("Details");
@@ -107,7 +108,7 @@ export const pushLead = async (req, res) => {
               console.log("Message: " + actionResponse.getMessage().getValue());
             }
           });
-        } else if (responseObject instanceof ZOHOCRMSDK.Record.APIException) {
+        } else if (responseObject instanceof Record.APIException) {
           console.log("Status: " + responseObject.getStatus().getValue());
           console.log("Code: " + responseObject.getCode().getValue());
           console.log("Details");
