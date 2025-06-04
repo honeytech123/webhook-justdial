@@ -1,19 +1,6 @@
 import "dotenv/config";
 import * as ZOHOCRMSDK from "@zohocrm/nodejs-sdk-8.0";
 
-initialize()
-  .then(
-    () => res.send("Initialised")
-    // createLeads(moduleAPIName)
-    //   .then(() => res.send("Record created"))
-    //   .catch((err) => {
-    //     res.end();
-    //   })
-  )
-  .catch((err) => {
-    res.end();
-  });
-
 export const pushLead = async (req, res) => {
   // Extract leads from the URL parameter which is sent by Justdial
   const leads = req.query;
@@ -152,4 +139,21 @@ export const pushLead = async (req, res) => {
   };
 
   let moduleAPIName = "leads";
+
+  if (Object.entries(leads).length > 0) {
+    initialize()
+      .then(
+        () => res.send("Initialised")
+        // createLeads(moduleAPIName)
+        //   .then(() => res.send("Record created"))
+        //   .catch((err) => {
+        //     res.end();
+        //   })
+      )
+      .catch((err) => {
+        res.end();
+      });
+  } else {
+    res.end();
+  }
 };
