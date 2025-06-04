@@ -1,5 +1,7 @@
 import "dotenv/config";
-import * as ZOHOCRMSDK from "@zohocrm/nodejs-sdk-8.0";
+import { ZOHOCRMSDK, initializeZoho } from "../init/initializer.js";
+
+await initializeZoho();
 
 export const pushLead = async (req, res) => {
   // Extract leads from the URL parameter which is sent by Justdial
@@ -26,20 +28,6 @@ export const pushLead = async (req, res) => {
     branchId: leads.branchpin || "",
     parentId: leads.parentid || "",
     leadSource: "JD",
-  };
-
-  // Function to Authenticate and initialize zoho crm
-  const initialize = async () => {
-    // Development - DEVELOPER(), Production-PRODUCTION(), Sandbox-SANDBOX()
-    let environment = ZOHOCRMSDK.INDataCenter.PRODUCTION();
-
-    let token = new ZOHOCRMSDK.OAuthBuilder()
-      .clientId(process.env.ZOHOCRM_CLIENT_ID)
-      .clientSecret(process.env.ZOHOCRM_CLIENT_SECRET)
-      .refreshToken(process.env.ZOHOCRM_REFRESH_TOKEN)
-      .build();
-
-    await (await new ZOHOCRMSDK.InitializeBuilder()).environment(environment).token(token).initialize();
   };
 
   // Function to create and push leads to zoho crm
@@ -139,21 +127,4 @@ export const pushLead = async (req, res) => {
   };
 
   let moduleAPIName = "leads";
-
-  if (Object.entries(leads).length > 0) {
-    initialize()
-      .then(
-        () => res.send("Initialised")
-        // createLeads(moduleAPIName)
-        //   .then(() => res.send("Record created"))
-        //   .catch((err) => {
-        //     res.end();
-        //   })
-      )
-      .catch((err) => {
-        res.end();
-      });
-  } else {
-    res.end();
-  }
 };
