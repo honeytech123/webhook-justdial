@@ -128,4 +128,6 @@ export const pushLead = async (req, res) => {
   };
 
   let moduleAPIName = "leads";
+
+  res.send("Leads");
 };
