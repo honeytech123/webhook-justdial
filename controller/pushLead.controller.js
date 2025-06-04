@@ -12,7 +12,7 @@ export const pushLead = async (req, res) => {
   const finalData = {
     justDialId: leads.leadid || "",
     leadType: leads.leadtype || "",
-    firstName: `${leads.prefix || "null"}. ${leads.name || "null"}`,
+    firstName: `${leads.prefix || "null"} ${leads.name || "null"}`,
     lastName: leads.name,
     mobile: leads.mobile || "",
     phone: leads.phone || "",
