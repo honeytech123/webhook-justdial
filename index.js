@@ -2,7 +2,7 @@
 import express from "express";
 import cors from "cors";
 import apiRoutes from "./routes/api.routes.js"; 
-import { initializeZoho } from "../init/initializer.js";
+import { initializeZoho } from "./init/initializer.js";
 
 const port = process.env.PORT || 3000;
 
