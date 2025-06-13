@@ -1,8 +1,5 @@
 import "dotenv/config";
-import { initializeZoho } from "../init/initializer.js";
 import { Record, HeaderMap, Choice } from "@zohocrm/nodejs-sdk-8.0";
-
-await initializeZoho();
 
 export const pushLead = async (req, res) => {
   // Extract leads from the URL parameter which is sent by Justdial
